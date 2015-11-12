@@ -1,6 +1,6 @@
-import weapons from Weapons
-import accessory from Accessory
-import armor from Armor 
+from weapons import Weapons
+from armor import Armor
+from accessory import Accessory 
 
 class Inventory:
 	weapons ={
@@ -15,4 +15,11 @@ class Inventory:
 	Armor.chainmail,
     Armor.bulwark,
     Armor.mystic
+	}
+
+	accessories ={
+	Accessory.buckler,
+	Accessory.heater,
+	Accessory.kite,
+	Accessory.mystic
 	}

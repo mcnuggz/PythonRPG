@@ -1,3 +1,7 @@
+from weapons import Weapons
+from armor import Armor
+from accessory import Accessory 
+
 class HeroStats:
     def __init__(self, base_health, base_attack, base_defense):
         self.base_health = base_health

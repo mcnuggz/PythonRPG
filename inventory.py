@@ -1,25 +1,12 @@
-from weapons import Weapons
-from armor import Armor
-from accessory import Accessory 
+import weapons
+import armor
+import accessory
 
 class Inventory:
-	weapons ={
-	Weapons.agedsword,
-	Weapons.longsword,
-	Weapons.enchanted_sword,
-	Weapons.mystic_sword
-	}
-
-	armors ={
-	Armor.leather_armor,
-	Armor.chainmail,
-    Armor.bulwark,
-    Armor.mystic
-	}
-
-	accessories ={
-	Accessory.buckler,
-	Accessory.heater,
-	Accessory.kite,
-	Accessory.mystic
-	}
+    player_equipment = {
+    "Weapon:":weapons.aged_Sword.name, 
+    "Armor:":armor.leather_armor.name,
+    "Accessory:":accessory.buckler.name
+    }
+    
+inventory = Inventory()

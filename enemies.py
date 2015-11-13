@@ -1,25 +1,33 @@
-class Enemy:
+import items
+
+class Enemies:
 	def __init__(self, name, health, attack, defense):
 		self.name = name
 		self.health = health
 		self.attack = attack
 		self.defense = defense
 
-	def enemy_info(self):
-		print("Enemy Name:", self.name)
-		print("Enemy HP:", self.health)
-		print("Enemy Attack:", self.attack)
-		print("Enemy Defense:", self.defense)
+	def is_alive(self):
+		return self.health > 0
 
-skeleton = Enemy("Risen Skeleton", 50, 4, 2)
-goblin = Enemy("Frienzied Goblin", 120, 5, 3)
-sorceror = Enemy("Twisted Sorceror", 170, 10, 6)
-behemoth = Enemy("Doomfang, the Enraged Behemoth", 250, 18, 18)
-print()
-skeleton.enemy_info()
-print()
-goblin.enemy_info()
-print()
-sorceror.enemy_info()
-print()
-behemoth.enemy_info()
+class Skeleton(Enemies):
+	def __init__(self, loot):
+		self.loot = loot
+		super().__init__(name="Risen Skeleton", health= 50, attack = 4, defense= 2, loot = items.Potion())
+
+class Goblin(Enemies):
+	def __init__(self, loot):
+		self.loot = loot
+		super().__init__(name="Frienzied Goblin", health= 120, attack= 5, defense= 3, loot = items.Potion())
+
+class Sorcerer(Enemies):
+	def __init__(self):
+		super().__init__(name="Twisted Sorcerer", health= 170, attack= 10, defense= 7)
+
+class Ogre(Enemies):
+	def __init__(self):
+		super().__init__(name="Jailer Ogre", health= 220, attack= 15, defense= 13)
+
+class Behemoth(Enemies):
+	def __init__(self):
+		super().__init__(name="Doomfang, the Enraged Behemoth", health= 250, attack= 18, defense= 18)

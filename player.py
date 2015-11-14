@@ -1,16 +1,58 @@
 import items
 
 class Player():
-	def __init__(self):
-		self.inventory= [items.AgedSword(), items.LeatherArmor(), items.Buckler(), items.Potions(0)]
-		self.maxhealth = self.health + items.Armor.bonus_health + items.Armor.extra_health
-		self.health = 100
-		self.location_x, self.location_y = dungeon.starting_position
-		self.victory = False
+    def __init__(self):
+        self.inventory= [items.AgedSword(), items.LeatherArmor(), items.Buckler(), items.Potions(0)]
+        self.health = 100
+        self.defense = 2
+        self.location_x, self.location_y = dungeon.starting_position
+        self.victory = False
 
-	def is_alive(self):
-		return self.health > 0
+    def is_alive(self):
+        return self.health > 0
 
-	def show_inventory(self):
-		for item in self.inventory:
-			print(item, '\n')
+    def show_inventory(self):
+        for item in self.inventory:
+            print(item, '\n')
+
+    def update_attack(self):
+        self.attack = self.attack + items.Weapon.attack
+
+    def update_health(self):
+        self.health = self.health + items.Armor.bonus_health + items.Accessory.extra_health
+
+    def update_defense(self):
+        self.defense = self.defense + items.Armor.defense + items.Accessory.extra_defense
+
+    def move(self, dx, dy):
+        self.location_x += dx
+        self.location_y += dy
+        print(dungeon.room_exists(self.location_x, self.location_y).intro_text())
+
+    def move_north(self):
+        self.move(dx= 0, dy= -1)
+
+    def move_south(self):
+        self.move(dx= 0, dy= 1)
+
+    def move_left(self):
+        self.move(dx= -1, dy= 0)
+
+    def move_right(self):
+        self.move(dx= 1, dy= 0)
+
+    def attack(self, enemy):
+        best_weapon = None
+        max_damage = 0
+        for item in self.inventory:
+            if isinstance(item, items.Weapon):
+                if item.attack > max_damage:
+                    max_damage = item.attack
+                    best_weapon = item
+
+        print("You use {} against {}!".format(best_weapon.name, enemy.name))
+        enemy.health -= best_weapon.attack
+        if not enemy.is_alive():
+            print("You killed {}!".format(enemy.name))
+        else:
+            print("{} HP is {}.".format(enemy.name, enemy.health))

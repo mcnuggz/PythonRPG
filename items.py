@@ -72,16 +72,21 @@ class MysticArmor(Armor):
 		super().__init__(name="Mystic Knight's Armor", description= "It appears like a standard set of Infantry armor, but you feel a comforting presence as you wear it.")
 
 #start accessoriess
+class Accessories(Item):
+	def __init__(self, name, description, extra_defense, extra_health):
+		self.extra_defense = extra_defense
+		self.extra_health = extra_health
+		super().__init__(name, description)
 #warrior accessories
-class Buckler(Armor):
+class Buckler(Accessories):
 	def __init__(self):
-		super().__init__(name="Worn Buckler Shield", description="A small shield that was given to you at the start of your adventure.", defense= 1, bonus_health= 10)
-class Heater(Armor):
+		super().__init__(name="Worn Buckler Shield", description="A small shield that was given to you at the start of your adventure.", extra_defense= 1, extra_health= 10)
+class Heater(Accessories):
 	def __init__(self):
-		super().__init__(name="Templar's Heater Shield", description="A shield painted white with a red cross painted over it. It appears to have served its previous owner well as it has several scatches etched along its surface.", defense= 3, bonus_health= 20)
-class Kite(Armor):
+		super().__init__(name="Templar's Heater Shield", description="A shield painted white with a red cross painted over it. It appears to have served its previous owner well as it has several scatches etched along its surface.", extra_defense= 3, extra_health= 20)
+class Kite(Accessories):
 	def __init__(self):
-		super().__init__(name="Blue Kite Shield", description="A long shield, covering the length of your body when standing. Painted blue and gold, has several stratches on its surface. It is difficult to manuever around with it.", defense= 5, bonus_health= 30)
-class MysticShield(Armor):
+		super().__init__(name="Blue Kite Shield", description="A long shield, covering the length of your body when standing. Painted blue and gold, has several stratches on its surface. It is difficult to manuever around with it.", extra_defense= 5, extra_health= 30)
+class MysticShield(Accessories):
 	def __init__(self):
-		super().__init__(name="Mystic Knight's Shield", description= "Looks like a standard metal buckler shield, however when it use a brilliant orange field extends out acting like a wall protecting its user.", defense = 7, bonus_health= 60)
+		super().__init__(name="Mystic Knight's Shield", description= "Looks like a standard metal buckler shield, however when it use a brilliant orange field extends out acting like a wall protecting its user.", extra_defense = 7, extra_health= 60)

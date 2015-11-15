@@ -1,5 +1,5 @@
-import items, enemies
-
+import items, enemies, actions, dungeon
+from time import sleep
 class Tile:
     def __init__(self, x, y):
         self.x = x
@@ -19,6 +19,24 @@ class Entrance(Tile):
     def modify_player(self, player):
         #Nothing happens in this room
         pass
+
+    def adjacent_moves(self):
+        moves= []
+        if dungeon.room_exists(self.x + 1, self.y):
+            moves.append(actions.MoveRight())
+        if dungeon.room_exists(self.x - 1, self.y):
+            moves.append(actions.MoveLeft())
+        if dungeon.room_exists(self.x, self.y - 1):
+            moves.append(actions.MoveUp())
+        if dungeon.room_exists(self.x, self.y + 1):
+            moves.append(actions.MoveDown())
+        return moves
+
+    def available_actions(self):
+        moves = self.adjacent_moves()
+        moves.append(actions.ViewInventory())
+
+        return moves
 
 class GainLoot(Tile):
     def __init__(self, x, y, item1, item2, item3):
@@ -57,6 +75,17 @@ class FindMysticRoom(GainLoot):
         return"""
         The Ogre collapses onto the ground being defeated by your hand. You lean over to catch your breath after the long battle with the creature. Suddenly a bright purple light shines and disappears as quickly as it appears. In its spot sits an elegant chest. You slowly approach it, still reeling from the brightness from the mysterious light. Taking the lid into your hands, you throw open the chest to reveal the Mystic Knight armor set and sword!
         """
+
+class BehemothDefeated(Tile):
+    def intro_text(self):
+        return"""
+        It was a difficult battle, but you stand victorious. Battered, but victorious and not dead. The city stands safe from a greater danger that would have ended the city you have sworn to protect. You turn towards the heavy double doors and begin your leave from the now silent dungeon.
+
+        Congratulations, you have won!
+        """
+    def modify_player(self, player):
+        player.victory = True
+
 class EnemyEncounter(Tile):
     def __init__(self, x, y, enemy):
         self.enemy = enemy
@@ -67,6 +96,12 @@ class EnemyEncounter(Tile):
             hero.health = hero.health - self.enemy.damage
             print("The enemy does {} damage. You have {} HP remaining.".format(self.enemy.damage, hero.health))
 
+    def available_actions(self):
+        if self.enemy.is_alive():
+            return[actions.Attack(enemy = self.enemy)]
+        else:
+            return self.adjacent_moves()
+
 class EmptyRoom(Tile):
     def intro_text(self):
         return"""
@@ -76,13 +111,24 @@ class EmptyRoom(Tile):
         #nothing happens
         pass
 
-class Sauna(Tile):
+class SaunaRoom(Tile):
     def intro_text(self):
         return"""
         You enter a warm room, turning out to be a natural sauna. You remove your armor and weapon, taking a seat out of the sight of the entrance and relaxing for several minutes.
         """
     # def modify_player(self, player):
         #function to restore health
+
+class DeathRoom(Tile):
+    def intro_text(self):
+        return"""
+        You cautiously enter the room and see no immediate threat. Closing the door behind you, you take a step forward and activate a hidden switch. A thick arrow jets out from a hole in the wall in front of you and punctures through your neck. You collapse to the floor, holding your neck as dark blood pours out from the hole the arrow created. But alas, you accept your fate and perish in the dark dungeon.
+        """
+
+    def modify_player(self, player):
+        player.death = True
+        sleep(4)
+        exit()
 
 class SkeletonRoom(EnemyEncounter):
     def __init__(self, x, y):
@@ -114,7 +160,7 @@ class GoblinRoom(EnemyEncounter):
 
 class SorcererRoom(EnemyEncounter):
     def __init__(self, x, y):
-        super().__init__(x, y, enemes.Sorcerer())
+        super().__init__(x, y, enemies.Sorcerer())
 
     def intro_text(self):
         if self.enemy.is_alive():
@@ -126,9 +172,9 @@ class SorcererRoom(EnemyEncounter):
             Such a terrible waste of life, the man lays dead over a bed of open books and scrolls covered in his own blood.
             """
 
-class Ogre(EnemyEncounter):
+class OgreRoom(EnemyEncounter):
     def __init__(self, x, y):
-        super().__init__(x, y, enemes.Ogre())
+        super().__init__(x, y, enemies.Ogre())
 
     def intro_text(self):
         if self.enemy.is_alive():
@@ -142,7 +188,7 @@ class Ogre(EnemyEncounter):
 
 class BehemothRoom(EnemyEncounter):
     def __init__(self, x, y):
-        super().__init__(x, y, enemes.Behemoth())
+        super().__init__(x, y, enemies.Behemoth())
 
     def intro_text(self):
         if self.enemy.is_alive():

@@ -1,5 +1,5 @@
 			OgreRoom	
-			TwistedSorcererRoom	
+			SorcererRoom	
 		DeathRoom	FindTier3Room	
 StartingRoom	SkeletonRoom	EmptyRoom	EmptyRoom	BehemothRoom
 		FindTier2Room	SaunaRoom	

@@ -1,5 +1,4 @@
 import random
-# import player
 
 #base class for items
 class Item(object):
@@ -20,7 +19,7 @@ class Potion(Item):
 
 #start weapons
 class Weapons(Item):
-    def __init__(self, name, attack, description):
+    def __init__(self, name, description, attack):
         self.attack = attack
         super().__init__(name, description)
 
@@ -77,7 +76,7 @@ class Accessory(Item):
 		self.extra_defense = extra_defense
 		self.extra_health = extra_health
 		super().__init__(name, description)
-		
+
 #warrior accessories
 class Buckler(Accessory):
 	def __init__(self):

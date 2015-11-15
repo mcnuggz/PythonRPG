@@ -7,6 +7,7 @@ class Player():
         self.defense = 2
         self.location_x, self.location_y = dungeon.starting_position
         self.victory = False
+        self.death = False
 
     def is_alive(self):
         return self.health > 0
@@ -29,10 +30,10 @@ class Player():
         self.location_y += dy
         print(dungeon.room_exists(self.location_x, self.location_y).intro_text())
 
-    def move_north(self):
+    def move_up(self):
         self.move(dx= 0, dy= -1)
 
-    def move_south(self):
+    def move_down(self):
         self.move(dx= 0, dy= 1)
 
     def move_left(self):
@@ -56,3 +57,8 @@ class Player():
             print("You killed {}!".format(enemy.name))
         else:
             print("{} HP is {}.".format(enemy.name, enemy.health))
+
+    def do_action(self, action, **kwargs):
+    	action_method= getattr(self, action.method.__name__)
+    	if action_method:
+    		action_method(**kwargs)

@@ -1,5 +1,6 @@
-import items, enemies, actions, dungeon
+import items, enemies, actions, dungeon, player
 from time import sleep
+
 class Tile:
     def __init__(self, x, y):
         self.x = x
@@ -11,7 +12,7 @@ class Tile:
     def modify_player(self, player):
         raise NotImplementedError()
 
-class Entrance(Tile):
+class StartingRoom(Tile):
     def intro_text(self):
         return """
         Deep below the streets of a bustling city, an aniquated prison was shaken awake from a mysterious force. You, hero, are a cadet in the citys' guard; tasked with the mission of investigating why the Earth shakes beneath the city.  You were provided with leather armor and an old sword and instructed about your mission and added that if the reasons are not natural, call for reinforcements and fall back. However, you only see that as a chance to prove yourself as a capable person, in hopes to becoming a Royal Guard. You steel yourself and enter the dark, cryptic entrance to the undercity.
@@ -50,6 +51,9 @@ class GainLoot(Tile):
 
     def modify_player(self, player):
         self.add_loot(player)
+        player.update_attack()
+        player.update_defense()
+        player.update_health()
 
 class FindTier2Room(GainLoot):
     def __init__(self, x, y):
@@ -57,11 +61,11 @@ class FindTier2Room(GainLoot):
 
     def intro_text(self):
         return"""
-        You enter what appears to be a kitchen. You look around the room finding a Longsword, a Heater shield and a Hauberk!
+        You enter what appears to be a kitchen. You look around the room finding a Longsword, a Heater shield and a Hauberk off the corpse of a warrior with a cleaver stuck through its skull!
         """
 class FindTier3Room(GainLoot):
     def __init__(self, x, y):
-        super().__init__(x, y, items.EnchantedLongsword(), items.Kite(), items.Bulwark())
+        super().__init__(x, y, items.Enchanted(), items.Kite(), items.Bulwark())
 
     def intro_text(self):
         return"""
@@ -87,8 +91,9 @@ class BehemothDefeated(Tile):
         player.victory = True
 
 class EnemyEncounter(Tile):
-    def __init__(self, x, y, enemy):
+    def __init__(self, x, y, enemy, loot):
         self.enemy = enemy
+        self.loot = loot
         super().__init__(x, y)
 
     def modify_player(self, hero):
@@ -132,7 +137,7 @@ class DeathRoom(Tile):
 
 class SkeletonRoom(EnemyEncounter):
     def __init__(self, x, y):
-        super().__init__(x, y, enemies.Skeleton())
+        super().__init__(x, y, enemies.Skeleton(), items.Potion())
 
     def intro_text(self):
         if self.enemy.is_alive():
@@ -146,7 +151,7 @@ class SkeletonRoom(EnemyEncounter):
 
 class GoblinRoom(EnemyEncounter):
     def __init__(self, x, y):
-        super().__init__(x, y, enemies.Goblin())
+        super().__init__(x, y, enemies.Goblin(), items.Potion())
 
     def intro_text(self):
         if self.enemy.is_alive():
@@ -160,7 +165,7 @@ class GoblinRoom(EnemyEncounter):
 
 class SorcererRoom(EnemyEncounter):
     def __init__(self, x, y):
-        super().__init__(x, y, enemies.Sorcerer())
+        super().__init__(x, y, enemies.Sorcerer(), None)
 
     def intro_text(self):
         if self.enemy.is_alive():
@@ -174,7 +179,7 @@ class SorcererRoom(EnemyEncounter):
 
 class OgreRoom(EnemyEncounter):
     def __init__(self, x, y):
-        super().__init__(x, y, enemies.Ogre())
+        super().__init__(x, y, enemies.Ogre(), None)
 
     def intro_text(self):
         if self.enemy.is_alive():
@@ -188,7 +193,7 @@ class OgreRoom(EnemyEncounter):
 
 class BehemothRoom(EnemyEncounter):
     def __init__(self, x, y):
-        super().__init__(x, y, enemies.Behemoth())
+        super().__init__(x, y, enemies.Behemoth(), None)
 
     def intro_text(self):
         if self.enemy.is_alive():

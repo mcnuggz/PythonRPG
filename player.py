@@ -2,9 +2,10 @@ import items
 
 class Player():
     def __init__(self):
-        self.inventory= [items.AgedSword(), items.LeatherArmor(), items.Buckler(), items.Potions(0)]
+        self.inventory= [items.Potion(2), items.AgedSword(), items.LeatherArmor(), items.Buckler()]
         self.health = 100
-        self.defense = 2
+        self.base_attack = 2
+        self.base_defense = 2
         self.location_x, self.location_y = dungeon.starting_position
         self.victory = False
         self.death = False
@@ -17,13 +18,13 @@ class Player():
             print(item, '\n')
 
     def update_attack(self):
-        self.attack = self.attack + items.Weapon.attack
+        self.base_attack = self.base_attack + items.Weapon.attack
 
     def update_health(self):
         self.health = self.health + items.Armor.bonus_health + items.Accessory.extra_health
 
     def update_defense(self):
-        self.defense = self.defense + items.Armor.defense + items.Accessory.extra_defense
+        self.base_defense = self.base_defense + items.Armor.defense + items.Accessory.extra_defense
 
     def move(self, dx, dy):
         self.location_x += dx
@@ -62,3 +63,5 @@ class Player():
     	action_method= getattr(self, action.method.__name__)
     	if action_method:
     		action_method(**kwargs)
+
+    # def use_potion(self):

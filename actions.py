@@ -1,6 +1,6 @@
 import player
-
-class Action():
+from items import Potion
+class Action:
     def __init__(self, method, name, hotkey, **kwargs):
         self.method = method
         self.hotkey = hotkey
@@ -33,3 +33,7 @@ class Action():
     def Attack(Action):
         def __init__(self, enemy):
             super().__init__(method=Player.attack, name="Attack", hotkey="a", enemy= enemy)
+
+    def UsePotion(Action):
+    	def __init__(self):
+    		super().__init__(method=Player.use_potion,name="Use Potion", hotkey="p")

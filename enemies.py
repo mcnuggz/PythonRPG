@@ -11,14 +11,12 @@ class Enemies:
 		return self.health > 0
 
 class Skeleton(Enemies):
-	def __init__(self, loot):
-		self.loot = loot
-		super().__init__(name="Risen Skeleton", health= 50, attack = 4, defense= 2, loot = items.Potion())
+	def __init__(self):
+		super().__init__(name="Risen Skeleton", health= 50, attack = 4, defense= 2)
 
 class Goblin(Enemies):
-	def __init__(self, loot):
-		self.loot = loot
-		super().__init__(name="Frienzied Goblin", health= 120, attack= 5, defense= 3, loot = items.Potion())
+	def __init__(self):
+		super().__init__(name="Frienzied Goblin", health= 120, attack= 5, defense= 3)
 
 class Sorcerer(Enemies):
 	def __init__(self):

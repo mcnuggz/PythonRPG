@@ -43,10 +43,13 @@ class MysticSword(Weapons):
 
 #start armor
 class Armor(Item):
-	def __init__(self, name, description, defense, bonus_health):
-		self.defense = defense
-		self.bonus_health = bonus_health
-		super().__init__(name, description)
+    def __init__(self, name, description, defense, bonus_health):
+        self.defense = defense
+        self.bonus_health = bonus_health
+        super().__init__(name, description)
+    
+    def __str__(self):
+        return "{}\n=====\n{}\n Defense:{}\n Bonus Health: {}".format(self.name, self.description, self.defense, self.bonus_health)
 
 #warrior armor
 class LeatherArmor(Armor):
@@ -65,10 +68,13 @@ class MysticArmor(Armor):
 
 #start accessoriess
 class Accessory(Item):
-	def __init__(self, name, description, extra_defense, extra_health):
-		self.extra_defense = extra_defense
-		self.extra_health = extra_health
-		super().__init__(name, description)
+    def __init__(self, name, description, extra_defense, extra_health):
+        self.extra_defense = extra_defense
+        self.extra_health = extra_health
+        super().__init__(name, description)
+    
+    def __str__(self):
+    	return "{}\n=====\n{}\n Defense:{}\n Bonus Health: {}".format(self.name, self.description, self.extra_defense, self.extra_health)
 
 #warrior accessories
 class Buckler(Accessory):

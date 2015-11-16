@@ -1,4 +1,4 @@
-import items, dungeon
+import dungeon, items
 
 class Player():
     def __init__(self):
@@ -6,9 +6,6 @@ class Player():
         self.health = 100
         self.base_attack = 2
         self.base_defense = 2
-        self.update_attack()
-        self.update_defense()
-        self.update_health()
         self.location_x, self.location_y = dungeon.starting_position
         self.victory = False
         self.death = False
@@ -19,15 +16,6 @@ class Player():
     def show_inventory(self):
         for item in self.inventory:
             print(item, '\n')
-
-    def update_attack(self):   
-        self.base_attack = self.base_attack + items.Weapons.attack
-
-    def update_health(self):
-        self.health = self.health + items.Armor.bonus_health + items.Accessory.extra_health
-
-    def update_defense(self):
-        self.base_defense = self.base_defense + items.Armor.defense + items.Accessory.extra_defense
 
     def move(self, dx, dy):
         self.location_x += dx
@@ -66,3 +54,5 @@ class Player():
     	action_method= getattr(self, action.method.__name__)
     	if action_method:
     		action_method(**kwargs)
+
+# agedSword=items.AgedSword(AgedSword.name, AgedSword.description, AgedSword.atack)

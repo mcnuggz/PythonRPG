@@ -6,6 +6,9 @@ class Player():
         self.health = 100
         self.base_attack = 2
         self.base_defense = 2
+        self.update_attack()
+        self.update_defense()
+        self.update_health()
         self.location_x, self.location_y = dungeon.starting_position
         self.victory = False
         self.death = False
@@ -17,8 +20,8 @@ class Player():
         for item in self.inventory:
             print(item, '\n')
 
-    def update_attack(self):
-        self.base_attack = self.base_attack + items.Weapon.attack
+    def update_attack(self):   
+        self.base_attack = self.base_attack + items.Weapons.attack
 
     def update_health(self):
         self.health = self.health + items.Armor.bonus_health + items.Accessory.extra_health
@@ -47,7 +50,7 @@ class Player():
         best_weapon = None
         max_damage = 0
         for item in self.inventory:
-            if isinstance(item, items.Weapon):
+            if isinstance(item, items.Weapons):
                 if item.attack > max_damage:
                     max_damage = item.attack
                     best_weapon = item

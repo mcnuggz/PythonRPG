@@ -1,35 +1,35 @@
-import player
+from player import Player
 
-class Action:
+class Actions:
     def __init__(self, method, name, hotkey, **kwargs):
         self.method = method
         self.hotkey = hotkey
-        self.name - name
+        self.name = name
         self.kwargs = kwargs
     
     def __str__(self):
         return "{}: {}".format(self.hotkey, self.name)
     
-    def MoveUp(Action):
-        def __init__(self):
-            super().__init__(method=Player.move_up, name="Move up", hotkey="[U]")
+class MoveUp(Actions):
+    def __init__(self):
+        super().__init__(method=Player.move_up, name="Move Up", hotkey="u")
 
-    def MoveDown(Action):
-        def __init__(self):
-            super().__init__(method=Player.move_down, name="Move down", hotkey="[D]")
+class MoveDown(Actions):
+    def __init__(self):
+        super().__init__(method=Player.move_down, name="Move Down", hotkey="d")
 
-    def MoveLeft(Action):
-        def __init__(self):
-            super().__init__(method=Player.move_left, name="Move left", hotkey="[L]")
+class MoveLeft(Actions):
+    def __init__(self):
+        super().__init__(method=Player.move_left, name="Move Left", hotkey="l")
 
-    def MoveRight(Action):
-        def __init__(self):
-            super().__init__(method=Player.move_right, name="Move right", hotkey="[R]")
+class MoveRight(Actions):
+    def __init__(self):
+        super().__init__(method=Player.move_right, name="Move Right", hotkey="r")
 
-    def ViewInventory(Action):
-        def __init__(self):
-            super().__init__(method=Player.print_inventory, name="View Inventory", hotkey="[I]")
+class ViewInventory(Actions):
+    def __init__(self):
+        super().__init__(method=Player.show_inventory, name="View Inventory", hotkey="i")
 
-    def Attack(Action):
-        def __init__(self, enemy):
-            super().__init__(method=Player.attack, name="Attack", hotkey="[A]", enemy= enemy)
+class Attack(Actions):
+    def __init__(self, enemy):
+        super().__init__(method=Player.attack, name="Attack", hotkey="a", enemy= enemy)

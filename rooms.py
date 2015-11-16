@@ -1,8 +1,4 @@
-import items
-import actions
-import enemies
-import dungeon
-import player
+import items, enemies, dungeon, player, actions
 from time import sleep
 
 class Tile:
@@ -25,14 +21,8 @@ class StartingRoom(Tile):
         #Nothing happens in this room
         pass
 
-    def available_actions(self):
-        moves = self.adjacent_moves()
-        moves.append(actions.ViewInventory())
-
-        return moves
-
     def adjacent_moves(self):
-        moves= []
+        moves = []
         if dungeon.room_exists(self.x + 1, self.y):
             moves.append(actions.MoveRight())
         if dungeon.room_exists(self.x - 1, self.y):
@@ -43,7 +33,10 @@ class StartingRoom(Tile):
             moves.append(actions.MoveDown())
         return moves
 
-
+    def available_actions(self):
+        moves = self.adjacent_moves()
+        moves.append(actions.ViewInventory())
+        return moves
 
 class GainLoot(Tile):
     def __init__(self, x, y, item1, item2, item3):
@@ -103,8 +96,8 @@ class EnemyEncounter(Tile):
 
     def modify_player(self, hero):
         if self.enemy.is_alive():
-            hero.health = hero.health - self.enemy.damage
-            print("The enemy does {} damage. You have {} HP remaining.".format(self.enemy.damage, hero.health))
+            hero.health = hero.health - self.enemy.attack
+            print("The enemy does {} damage. You have {} HP remaining.".format(self.enemy.attack, hero.health))
 
     def available_actions(self):
         if self.enemy.is_alive():
@@ -147,11 +140,11 @@ class SkeletonRoom(EnemyEncounter):
     def intro_text(self):
         if self.enemy.is_alive():
             return """
-            A pile of bones rattle and assemble into the shape of a human. Its eyes glow red and charges at you, sword raised!
+A pile of bones rattle and assemble into the shape of a human. Its eyes glow red and charges at you, sword raised!
             """
         else:
             return """
-            The bones of the fallen skeleton warrior lay on the ground with the skull shattered by the heel of your boot.
+The bones of the fallen skeleton warrior lay on the ground with the skull shattered by the heel of your boot.
             """
 
 class GoblinRoom(EnemyEncounter):
@@ -161,11 +154,11 @@ class GoblinRoom(EnemyEncounter):
     def intro_text(self):
         if self.enemy.is_alive():
             return"""
-            A small human-like creature bursts out from corner of the room, its eyes showing signs of hysteria and menance as it stares at you. He lets out a loud cackle and lunges at you!
+A small human-like creature bursts out from corner of the room, its eyes showing signs of hysteria and menance as it stares at you. He lets out a loud cackle and lunges at you!
             """
         else:
             return """
-            The corpse of the goblin lays dead on the floor in a puddle of its own drool and blood.
+The corpse of the goblin lays dead on the floor in a puddle of its own drool and blood.
             """
 
 class SorcererRoom(EnemyEncounter):

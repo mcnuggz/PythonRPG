@@ -1,5 +1,6 @@
 import random
 import player
+
 #base class for items
 class Item(object):
 	def __init__(self, name, description):
@@ -7,7 +8,7 @@ class Item(object):
 		self.description = description
 
 	def __str__(self):
-		return "{}\n=====\n{}\nDamage: {}".format(self.name, self.description)
+		return "{}\n=====\n{}".format(self.name, self.description)
 
 #start weapons
 class Weapons(Item):
@@ -16,7 +17,7 @@ class Weapons(Item):
         super().__init__(name, description)
 
     def __str__(self):
-    	return "{}\n=====\n{}\nDamage: {}".format(self.name, self.description, self.attack)
+    	return "{}\n=====\n{}\n Attack:{}".format(self.name, self.description, self.attack)
 
 #warrior weapons
 class AgedSword(Weapons):

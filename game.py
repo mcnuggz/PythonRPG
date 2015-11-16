@@ -17,7 +17,7 @@ def play():
 			action_input = input("Action: ")
 			for action in available_actions:
 				if action_input == action.hotkey:
-					player.do_action(action, **kwargs)
+					player.do_action(action, **action.kwargs)
 					break
 
 if __name__ == "__main__":

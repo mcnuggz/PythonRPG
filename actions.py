@@ -16,20 +16,20 @@ class Action:
 
     def MoveDown(Action):
         def __init__(self):
-            super().__init__(method=Player.move_down, name="Move down", hotkey="d")
+            super().__init__(method=Player.move_down, name="Move down", hotkey="[D]")
 
     def MoveLeft(Action):
         def __init__(self):
-            super().__init__(method=Player.move_left, name="Move left", hotkey="l")
+            super().__init__(method=Player.move_left, name="Move left", hotkey="[L]")
 
     def MoveRight(Action):
         def __init__(self):
-            super().__init__(method=Player.move_right, name="Move right", hotkey="r")
+            super().__init__(method=Player.move_right, name="Move right", hotkey="[R]")
 
     def ViewInventory(Action):
         def __init__(self):
-            super().__init__(method=Player.print_inventory, name="View Inventory", hotkey="i")
+            super().__init__(method=Player.print_inventory, name="View Inventory", hotkey="[I]")
 
     def Attack(Action):
         def __init__(self, enemy):
-            super().__init__(method=Player.attack, name="Attack", hotkey="a", enemy= enemy)
+            super().__init__(method=Player.attack, name="Attack", hotkey="[A]", enemy= enemy)

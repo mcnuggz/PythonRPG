@@ -1,4 +1,8 @@
-import items, enemies, actions, dungeon, player
+import items
+import actions
+import enemies
+import dungeon
+import player
 from time import sleep
 
 class Tile:
@@ -26,7 +30,7 @@ class StartingRoom(Tile):
         moves.append(actions.ViewInventory())
 
         return moves
-        
+
     def adjacent_moves(self):
         moves= []
         if dungeon.room_exists(self.x + 1, self.y):

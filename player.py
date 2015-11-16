@@ -1,8 +1,8 @@
-import items
+import items, dungeon
 
 class Player():
     def __init__(self):
-        self.inventory= [items.Potion(2), items.AgedSword(), items.LeatherArmor(), items.Buckler()]
+        self.inventory= [items.AgedSword(), items.LeatherArmor(), items.Buckler()]
         self.health = 100
         self.base_attack = 2
         self.base_defense = 2
@@ -63,5 +63,3 @@ class Player():
     	action_method= getattr(self, action.method.__name__)
     	if action_method:
     		action_method(**kwargs)
-
-    # def use_potion(self):

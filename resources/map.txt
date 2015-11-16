@@ -1,6 +1,6 @@
 			OgreRoom	
 			SorcererRoom	
 		DeathRoom	FindTier3Room	
-StartingRoom	SkeletonRoom	EmptyRoom	EmptyRoom	BehemothRoom
+StartingRoom	SkeletonRoom	EmptyRoom	EmptyRoom	BehemothRoom	BehemothDefeated
 		FindTier2Room	SaunaRoom	
 		GoblinRoom		

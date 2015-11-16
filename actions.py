@@ -1,5 +1,5 @@
 import player
-from items import Potion
+
 class Action:
     def __init__(self, method, name, hotkey, **kwargs):
         self.method = method
@@ -12,7 +12,7 @@ class Action:
     
     def MoveUp(Action):
         def __init__(self):
-            super().__init__(method=Player.move_up, name="Move up", hotkey="u")
+            super().__init__(method=Player.move_up, name="Move up", hotkey="[U]")
 
     def MoveDown(Action):
         def __init__(self):
@@ -33,7 +33,3 @@ class Action:
     def Attack(Action):
         def __init__(self, enemy):
             super().__init__(method=Player.attack, name="Attack", hotkey="a", enemy= enemy)
-
-    def UsePotion(Action):
-    	def __init__(self):
-    		super().__init__(method=Player.use_potion,name="Use Potion", hotkey="p")

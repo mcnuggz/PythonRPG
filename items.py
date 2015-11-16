@@ -9,10 +9,6 @@ class Item(object):
 	def __str__(self):
 		return "{}\n=====\n{}\nDamage: {}".format(self.name, self.description)
 
-class Potion(Item):
-	def __init__(self):
-		super().__init__(name="Health Potion", description="A bottle of questionable color and taste. Fully restores your health")
-
 #start weapons
 class Weapons(Item):
     def __init__(self, name, description, attack):

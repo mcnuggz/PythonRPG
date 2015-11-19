@@ -1,6 +1,7 @@
 import dungeon, items
+import random
 
-class Player():
+class Player:
     def __init__(self):
         self.inventory= [items.AgedSword(), items.LeatherArmor(), items.Buckler()]
         self.health = 100
@@ -55,4 +56,7 @@ class Player():
     	if action_method:
     		action_method(**kwargs)
 
-# agedSword=items.AgedSword(AgedSword.name, AgedSword.description, AgedSword.atack)
+    def flee(self, room):
+        available_moves= rooml.adjacent_moves()
+        r = random.randint(0, len(available_moves) -1)
+        self.do_action(available_moves[r])

@@ -1,6 +1,9 @@
 _dungeon= {}
 starting_position = (0, 0)
 
+def room_exists(x, y):
+	return _dungeon.get((x, y))
+
 def load_rooms():
 	with open('resources/map.txt', 'r') as map:
 		rows = map.readlines()
@@ -13,6 +16,3 @@ def load_rooms():
 				global starting_position 
 				starting_position= (x, y)
 			_dungeon[(x, y)] = None if room_name == '' else getattr(__import__('rooms'), room_name)(x, y)
-
-def room_exists(x, y):
-	return _dungeon.get((x, y))

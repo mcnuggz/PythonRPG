@@ -33,3 +33,7 @@ class ViewInventory(Actions):
 class Attack(Actions):
     def __init__(self, enemy):
         super().__init__(method=Player.attack, name="Attack", hotkey="a", enemy= enemy)
+
+class Flee(Actions):
+    def __init__(self, room):
+        super().__init__(method=Player.flee, name="Flee", hotkey="f", room= room)

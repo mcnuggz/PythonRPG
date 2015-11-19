@@ -12,15 +12,6 @@ class Tile:
     def modify_player(self, player):
         raise NotImplementedError()
 
-class StartingRoom(Tile):
-    def intro_text(self):
-        return """
-    Deep below the streets of a bustling city, an aniquated prison was shaken awake from a mysterious force. You, hero, are a cadet  in the citys' guard; tasked with the mission of investigating why the Earth shakes beneath the city.  You were provided with  leather armor and an old sword and instructed about your mission and added that if the reasons are not natural, call for  reinforcements and fall back. However, you only see that as a chance to prove yourself as a capable person, in hopes to  becoming a Royal Guard. You steel yourself and enter the dark, cryptic entrance to the undercity.
-        """
-    def modify_player(self, player):
-        #Nothing happens in this room
-        pass
-
     def adjacent_moves(self):
         moves = []
         if dungeon.room_exists(self.x + 1, self.y):
@@ -37,6 +28,15 @@ class StartingRoom(Tile):
         moves = self.adjacent_moves()
         moves.append(actions.ViewInventory())
         return moves
+        
+class StartingRoom(Tile):
+    def intro_text(self):
+        return """
+    Deep below the streets of a bustling city, an aniquated prison was shaken awake from a mysterious force. You, hero, are a cadet  in the citys' guard; tasked with the mission of investigating why the Earth shakes beneath the city.  You were provided with  leather armor and an old sword and instructed about your mission and added that if the reasons are not natural, call for  reinforcements and fall back. However, you only see that as a chance to prove yourself as a capable person, in hopes to  becoming a Royal Guard. You steel yourself and enter the dark, cryptic entrance to the undercity.
+        """
+    def modify_player(self, player):
+        #Nothing happens in this room
+        pass
 
 class GainLoot(Tile):
     def __init__(self, x, y, item1, item2, item3):
@@ -101,7 +101,7 @@ class EnemyEncounter(Tile):
 
     def available_actions(self):
         if self.enemy.is_alive():
-            return[actions.Attack(enemy = self.enemy)]
+            return[actions.Flee(room = self), actions.Attack(enemy = self.enemy)]
         else:
             return self.adjacent_moves()
 

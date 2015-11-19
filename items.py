@@ -64,7 +64,7 @@ class Bulwark(Armor):
 		super().__init__(name="Knight of the Bulwark's Armor", description="The armor from the Bulwark's Order was famously known for its defensive capabilities, as well as its weight.", defense= 12, bonus_health= 80)
 class MysticArmor(Armor):
 	def __init__(self):
-		super().__init__(name="Mystic Knight's Armor", description= "It appears like a standard set of Infantry armor, but you feel a comforting presence as you wear it.")
+		super().__init__(name="Mystic Knight's Armor", description= "It appears like a standard set of Infantry armor, but you feel a comforting presence as you wear it.", defense = 15, bonus_health= 120)
 
 #start accessoriess
 class Accessory(Item):
@@ -89,3 +89,18 @@ class Kite(Accessory):
 class MysticShield(Accessory):
 	def __init__(self):
 		super().__init__(name="Mystic Knight's Shield", description= "Looks like a standard metal buckler shield, however when it use a brilliant orange field extends out acting like a wall protecting its user.", extra_defense = 7, extra_health= 60)
+
+agedSword = AgedSword()
+longsword = Longsword()
+enchanted = Enchanted()
+mysticSword = MysticSword()
+
+leatherarmor = LeatherArmor()
+chainmail = Chainmail()
+bulwark = Bulwark()
+mysticArmor = MysticArmor()
+
+buckler = Buckler()
+heater= Heater()
+kiteShield = Kite()
+mysticSheild = MysticShield()
